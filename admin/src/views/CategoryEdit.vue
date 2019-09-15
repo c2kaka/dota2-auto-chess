@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>新建分类</h1>
+    <h1>{{id ? '编辑' : '新建'}}分类</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
       <el-form-item label="分类名称">
         <el-input v-model="model.name" placeholder="分类名称"></el-input>
@@ -14,22 +14,42 @@
 
 <script>
 export default {
-  name: 'CategoryEdit',
-  data(){
+  name: "CategoryEdit",
+  props: {
+    id: {}
+  },
+  data() {
     return {
-      model:{}
+      model: {}
+    };
+  },
+  methods: {
+    async save() {
+      if(this.id){
+        await this.$http.put(`categories/${this.id}`,this.model);
+        this.routerPush();
+      }else{
+        await this.$http.post("categories", this.model);
+        this.routerPush();
+      }
+    },
+
+    async fetch(){
+      const res = await this.$http.get(`categories/${this.id}`);
+      this.model = res.data;
+    },
+
+    routerPush(){
+      this.$router.push("/categories/list");
+      this.$message({
+        type: "success",
+        message: "保存成功"
+      });
     }
   },
-  methods:{
-    async save(){
-      console.log('save categories')
-      const res = await this.$http.post('categories',this.model)
-      this.$router.push('/categories/list')
-      this.$message({
-        type: 'success',
-        message: '保存成功'
-      })
-    }
+
+  created(){
+    this.id && this.fetch();
   }
-}
+};
 </script>
