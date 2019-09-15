@@ -2,6 +2,7 @@
   <el-table :data="categories" style="width: 100%">
     <el-table-column prop="_id" label="ID" width="240"></el-table-column>
     <el-table-column prop="name" label="分类名称"></el-table-column>
+    <el-table-column prop="parent.name" label="上级分类"></el-table-column> 
     <el-table-column fixed="right" label="操作" width="200">
       <template slot-scope="scope">
         <el-button type="primary" size="small" @click="$router.push(`/categories/edit/${scope.row._id}`)">编辑</el-button>
