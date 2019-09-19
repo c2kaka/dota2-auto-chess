@@ -15,8 +15,8 @@ const schema = mongoose.Schema({
   skills: [{
     icon: { type: String },
     name: { type: String },
-    delay: { type: String },
-    cost: { type: String },
+    delay: { type: Number },
+    cost: { type: Number },
     description: { type: String },
     tips: { type: String },
     level: {type: Number}
