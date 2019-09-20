@@ -13,11 +13,18 @@ import AdEdit from './views/AdEdit';
 import AdList from './views/AdList';
 import AdminUserEdit from './views/AdminUserEdit';
 import AdminUserList from './views/AdminUserList';
+import Login from './views/Login';
 
 Vue.use(Router);
 
 export default new Router({
   routes: [
+    {
+      path: "/login",
+      name: 'login',
+      component: Login
+    },
+
     {
       path: "/",
       name: "home",
