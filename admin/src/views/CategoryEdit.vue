@@ -17,6 +17,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">提交</el-button>
+        <el-button type="primary" @click="$router.push('/categories/list')">返回</el-button>
       </el-form-item>
     </el-form>
   </div>
