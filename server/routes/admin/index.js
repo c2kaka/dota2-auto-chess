@@ -7,6 +7,9 @@ module.exports = app => {
   const jwt = require("jsonwebtoken");
   const assert = require('http-assert');
 
+  const authMiddleware = require('../../middleware/authMiddleware');
+  const resourceMiddleware = require('../../middleware/resourceMiddleware');
+
   // 新建资源
   router.post("/", async (req, res) => {
     const model = await req.model.create(req.body);
@@ -16,15 +19,6 @@ module.exports = app => {
   // 查询资源列表
   router.get(
     "/",
-    async (req, res, next) => {
-      const token = String(req.headers.authorization || '').split(' ').pop();
-      assert(token, 401, '请先登录！');
-      const { id } = jwt.verify(token, app.get('privateKey'));
-      assert(id, 401, '请先登录！');
-      req.user = await AdminUser.findById(id);
-      assert(req.user, 401, '请先登录！');
-      await next();
-    },
     async (req, res) => {
       let queryOptions = {};
       const modelName = req.model.modelName;
@@ -62,11 +56,8 @@ module.exports = app => {
   // 通用接口中间件
   app.use(
     "/admin/api/rest/:resource",
-    async (req, res, next) => {
-      const modelName = require("inflection").classify(req.params.resource);
-      req.model = require(`../../models/${modelName}`);
-      next();
-    },
+    authMiddleware(),
+    resourceMiddleware(),
     router
   );
 
