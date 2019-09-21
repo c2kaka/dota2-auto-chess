@@ -2,6 +2,8 @@ const express = require("express");
 
 const app = express();
 
+app.set('privateKey', 'aeyraaui1214jadfh81910');
+
 app.use(express.json());
 app.use(require("cors")());
 

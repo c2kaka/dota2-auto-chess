@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { METHODS } from "http";
 export default {
   name: "Login",
   data() {
@@ -29,7 +28,17 @@ export default {
   },
 
   methods: {
-    handleLogin() {}
+   async handleLogin() {
+     const res = await this.$http.post('login', this.model);
+     if(res.data.token){
+       localStorage.setItem('token',res.data.token);
+       this.$router.push('/');
+       this.$message({
+         type: 'success',
+         message: '登录成功！'
+       })
+     }
+    }
   }
 };
 </script>
