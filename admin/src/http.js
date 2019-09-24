@@ -25,7 +25,6 @@ http.interceptors.response.use(res => {
             message: err.response.data.message
         })
     }
-    console.log(err.response);
     if(err.response.status === 401){
         router.push('/login');
     }

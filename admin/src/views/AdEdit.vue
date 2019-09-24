@@ -21,7 +21,8 @@
             <el-form-item style="margin-top:0.5em" label="广告海报">
               <el-upload
                 class="avatar-uploader"
-                :action="$http.defaults.baseURL+'/upload'"
+                :action="uploadUrl"
+                :headers="getAuthorization()"
                 :show-file-list="false"
                 :on-success="res => $set(item, 'image', res.url)"
               >
