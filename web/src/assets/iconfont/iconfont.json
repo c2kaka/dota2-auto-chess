@@ -1,0 +1,51 @@
+{
+  "id": "1434562",
+  "name": "刀塔自走棋",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "431893",
+      "name": "news",
+      "font_class": "news",
+      "unicode": "e772",
+      "unicode_decimal": 59250
+    },
+    {
+      "icon_id": "1017661",
+      "name": "攻略",
+      "font_class": "qa",
+      "unicode": "e6e9",
+      "unicode_decimal": 59113
+    },
+    {
+      "icon_id": "2085866",
+      "name": "省略号",
+      "font_class": "more",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "2490198",
+      "name": "攻略",
+      "font_class": "idea",
+      "unicode": "e6dc",
+      "unicode_decimal": 59100
+    },
+    {
+      "icon_id": "6435677",
+      "name": "Artifact-英雄",
+      "font_class": "hero",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "8960466",
+      "name": "video",
+      "font_class": "video",
+      "unicode": "e803",
+      "unicode_decimal": 59395
+    }
+  ]
+}
