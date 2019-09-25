@@ -1,3 +1,5 @@
+@import 'variable';
+
 * {
   box-sizing: border-box;
   outline: none;
@@ -18,19 +20,6 @@ a {
   color: #999;
 }
 
-//colors
-$colors: (
-  "primary": #db9e3f,
-  "white": #fff,
-  "light": #f9f9f9,
-  "grey": #999,
-  "grey1": #666,
-  "dark1": #343440,
-  "dark2": #333,
-  "dark": #222,
-  "black": #000
-);
-
 //text-colors
 @each $colorKey, $color in $colors {
   .text-#{$colorKey} {
@@ -45,26 +34,20 @@ $colors: (
 //text
 @each $var in (left, center, right) {
   .text-#{$var} {
-    text-align: $var;
+    text-align: $var !important;
   }
 }
 
+//width,height
+.w-100{
+  width: 100vw;
+}
+
+.h-100{
+  height: 100vh;
+}
+
 //font-size
-
-$base-font-size: 1rem;
-$font-sizes: (
-  xs: 0.7692,
-  //10px
-    sm: 0.9231,
-  //12px
-    md: 1,
-  //13px
-    lg: 1.0769,
-  //14px
-    xl: 1.2308,
-  //16px
-);
-
 @each $sizeKey, $size in $font-sizes {
   .fs-#{$sizeKey} {
     font-size: $size * $base-font-size;
@@ -80,26 +63,11 @@ $font-sizes: (
   flex-direction: column;
 }
 
-$flex-jc: (
-  start: flex-start,
-  end: flex-end,
-  center: center,
-  between: space-between,
-  around: space-around
-);
-
 @each $key, $value in $flex-jc {
   .jc-#{$key} {
     justify-content: $value;
   }
 }
-
-$flex-ai: (
-  start: flex-start,
-  end: flex-end,
-  center: center,
-  stretch: stretch
-);
 
 @each $key, $value in $flex-ai {
   .ai-#{$key} {
@@ -116,29 +84,6 @@ $flex-ai: (
 }
 
 //spacing
-$spacing-types: (
-  m: margin,
-  p: padding
-);
-
-$spacing-directions: (
-  l: left,
-  r: right,
-  t: top,
-  b: bottom
-);
-
-$spacing-base-size: 1rem;
-
-$spacing-sizes: (
-  0: 0,
-  1: 0.25,
-  2: 0.5,
-  3: 1,
-  4: 1.5,
-  5: 3
-);
-
 @each $typeKey, $type in $spacing-types {
   //.m-1 => margin:1*base-size rem
   @each $sizeKey, $size in $spacing-sizes {
