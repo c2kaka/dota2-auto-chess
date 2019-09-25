@@ -23,49 +23,27 @@
       </swiper>
     </div>
     <!-- end of swiper -->
-    <m-card title="新闻资讯" icon='news'>
-      <div class="nav jc-between p-2 mt-2 fs-md">
-        <div class="nav-item active">
-          <div class="nav-link">热门</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">公告</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">活动</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">赛事</div>
-        </div>
-      </div>
-      <!-- end of card nav -->
-      <div class="mt-2">
-        <swiper>
-          <swiper-slide v-for="n in 5" :key="n">
-            <div class="p-2 fs-lg" v-for="n in 5" :key="n">
-              <span>[新闻]</span>
-              <span>|</span>
-              <span>关于甜蜜特别活动延迟开放的公告</span>
+    <m-list-card title="新闻资讯" icon="news" :categories="newsCategories">
+      <template #items="{category}">
+        <div class="p-2 fs-lg" v-for="(news, i) in category.newsList" :key="i">
+          <span>[{{news.categoryName}}]</span>
+          <span>|</span>
+          <span>{{news.title}}</span>
 
-              <span>09/25</span>
-            </div>
-          </swiper-slide>
-        </swiper>
-      </div>
-    </m-card>
+          <span>{{news.date}}</span>
+        </div>
+      </template>
+    </m-list-card>
   </div>
 </template>
 
 <script>
-import Card from '../components/Card';
+import ListCard from "../components/ListCard";
 export default {
   name: "home",
 
   components: {
-    "m-card": Card,
+    "m-list-card": ListCard
   },
 
   data() {
@@ -80,7 +58,50 @@ export default {
         },
         loop: true
       },
-      swiperSlides: [1, 2, 3, 4, 5]
+      swiperSlides: [1, 2, 3, 4, 5],
+
+      newsCategories: [
+        {
+          name: "热门",
+          newsList: new Array(5).fill({
+            categoryName: "热门",
+            title: "关于甜蜜特别活动延迟开放的公告",
+            date: "09/24"
+          })
+        },
+        {
+          name: "新闻",
+          newsList: new Array(5).fill({
+            categoryName: "新闻",
+            title: "关于甜蜜特别活动延迟开放的公告",
+            date: "09/24"
+          })
+        },
+        {
+          name: "公告",
+          newsList: new Array(5).fill({
+            categoryName: "公告",
+            title: "关于甜蜜特别活动延迟开放的公告",
+            date: "09/24"
+          })
+        },
+        {
+          name: "活动",
+          newsList: new Array(5).fill({
+            categoryName: "活动",
+            title: "关于甜蜜特别活动延迟开放的公告",
+            date: "09/24"
+          })
+        },
+        {
+          name: "赛事",
+          newsList: new Array(5).fill({
+            categoryName: "赛事",
+            title: "关于甜蜜特别活动延迟开放的公告",
+            date: "09/24"
+          })
+        }
+      ]
     };
   },
   computed: {},
@@ -89,7 +110,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/iconfont/iconfont.css';
+@import "../assets/iconfont/iconfont.css";
 
 .swiper-pagination-bullets {
   .swiper-pagination-bullet {
