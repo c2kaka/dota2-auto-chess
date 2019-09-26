@@ -28,5 +28,10 @@
   </div>
 </template>
 
-<style>
+<style lang='scss'>
+    .top-bar {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+    }
 </style>  
