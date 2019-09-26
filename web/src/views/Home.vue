@@ -25,22 +25,41 @@
     <!-- end of swiper -->
     <m-list-card title="新闻资讯" icon="news" :categories="newsCategories">
       <template #items="{category}">
-        <div class="p-2 fs-lg" v-for="(news, i) in category.newsList" :key="i">
-          <span>[{{news.categoryName}}]</span>
-          <span>|</span>
-          <span>{{news.title}}</span>
+        <div class="p-2 fs-lg d-flex" v-for="(news, i) in category.newsList" :key="i">
+          <span class="text-info">[{{news.categoryName}}]</span>
+          <span class="px-2">|</span>
+          <span class="flex-1 text-dark1 text-ellipsis pr-2">{{news.title}}</span>
 
-          <span>{{news.date}}</span>
+          <span class="fs-sm text-grey1">{{news.createdAt | date}}</span>
         </div>
       </template>
     </m-list-card>
+    <!-- end of newsList -->
+    <m-list-card title="英雄列表" icon="hero" :categories="heroCategories">
+      <template #items="{category}">
+        <div class="d-flex flex-wrap" style='margin: 0 -0.3rem'>
+          <div class="p-2 fs-sm text-center" style="width:25%" v-for="(hero, i) in category.heroList" :key="i">
+          <img :src="hero.avatar" class="w-100 bor-rad" alt="">
+          <div>{{hero.name}}</div>
+        </div>
+        </div>
+      </template>
+    </m-list-card>
+    
   </div>
 </template>
 
 <script>
 import ListCard from "../components/ListCard";
+import dayjs from 'dayjs';
 export default {
   name: "home",
+
+  filters:{
+    date(val){
+      return dayjs(val).format('MM/DD');
+    }
+  },
 
   components: {
     "m-list-card": ListCard
@@ -60,52 +79,26 @@ export default {
       },
       swiperSlides: [1, 2, 3, 4, 5],
 
-      newsCategories: [
-        {
-          name: "热门",
-          newsList: new Array(5).fill({
-            categoryName: "热门",
-            title: "关于甜蜜特别活动延迟开放的公告",
-            date: "09/24"
-          })
-        },
-        {
-          name: "新闻",
-          newsList: new Array(5).fill({
-            categoryName: "新闻",
-            title: "关于甜蜜特别活动延迟开放的公告",
-            date: "09/24"
-          })
-        },
-        {
-          name: "公告",
-          newsList: new Array(5).fill({
-            categoryName: "公告",
-            title: "关于甜蜜特别活动延迟开放的公告",
-            date: "09/24"
-          })
-        },
-        {
-          name: "活动",
-          newsList: new Array(5).fill({
-            categoryName: "活动",
-            title: "关于甜蜜特别活动延迟开放的公告",
-            date: "09/24"
-          })
-        },
-        {
-          name: "赛事",
-          newsList: new Array(5).fill({
-            categoryName: "赛事",
-            title: "关于甜蜜特别活动延迟开放的公告",
-            date: "09/24"
-          })
-        }
-      ]
+      newsCategories: [],
+
+      heroCategories: [],
     };
   },
-  computed: {},
-  mounted() {}
+  methods: {
+    async fecthNewsList(){
+      const res = await this.$http.get('news/list');
+      this.newsCategories = res.data;
+    },
+
+    async fecthHeroList(){
+      const res = await this.$http.get('heroes/list');
+      this.heroCategories =  res.data;
+    }
+  },
+  created() {
+    this.fecthNewsList();
+    this.fecthHeroList();
+  }
 };
 </script>
 

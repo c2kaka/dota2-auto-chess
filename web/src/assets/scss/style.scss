@@ -40,11 +40,11 @@ a {
 
 //width,height
 .w-100{
-  width: 100vw;
+  width: 100%;
 }
 
 .h-100{
-  height: 100vh;
+  height: 100%;
 }
 
 //font-size
@@ -61,6 +61,10 @@ a {
 
 .flex-column {
   flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 @each $key, $value in $flex-jc {
@@ -156,4 +160,16 @@ a {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+
+//text ellipsis
+.text-ellipsis{
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+}
+
+.bor-rad{
+  border-radius: 0.3846rem;
 }

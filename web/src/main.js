@@ -9,6 +9,11 @@ Vue.config.productionTip = false
 import './assets/scss/style.scss';
 import router from './router'
 
+import axios from 'axios';
+Vue.prototype.$http = axios.create({
+  baseURL: 'http://localhost:3000/web/api'
+})
+
 Vue.use(VueAwesomeSwiper, /* { default global options } */)
 
 new Vue({
