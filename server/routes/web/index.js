@@ -102,5 +102,11 @@ module.exports = app => {
     res.send(article);
   });
 
+  //英雄详情接口
+  router.get('/hero/:id', async (req, res) => {
+    const hero = await Hero.findById(req.params.id);
+    res.send(hero);
+  });
+
   app.use("/web/api", router);
 };
