@@ -4,6 +4,7 @@ module.exports = app => {
   const Category = require("../../models/Category");
   const Article = require("../../models/Article");
   const Hero = require("../../models/Hero");
+
   //新闻列表接口
   router.get("/news/list", async (req, res) => {
     const parent = await Category.findOne({
@@ -93,6 +94,12 @@ module.exports = app => {
     });
 
     res.send(categories);
+  });
+
+  //文章详情页接口
+  router.get('/article/:id', async (req, res) => {
+    const article = await Article.findById(req.params.id);
+    res.send(article);
   });
 
   app.use("/web/api", router);

@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang='scss'>
-    @import '../assets/iconfont/iconfont.css';
+    // @import url('//at.alicdn.com/t/font_1434562_j66q9hrqutp.css');
     @import '../assets/scss/variable';
     .card-header{
         border-bottom: 1px solid $border-color;

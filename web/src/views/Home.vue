@@ -25,39 +25,49 @@
     <!-- end of swiper -->
     <m-list-card title="新闻资讯" icon="news" :categories="newsCategories">
       <template #items="{category}">
-        <div class="p-2 fs-lg d-flex" v-for="(news, i) in category.newsList" :key="i">
+        <router-link
+          tag="div"
+          :to='`article/${news._id}`'
+          class="p-2 fs-lg d-flex"
+          v-for="(news, i) in category.newsList"
+          :key="i"
+        >
           <span class="text-info">[{{news.categoryName}}]</span>
           <span class="px-2">|</span>
           <span class="flex-1 text-dark1 text-ellipsis pr-2">{{news.title}}</span>
 
           <span class="fs-sm text-grey1">{{news.createdAt | date}}</span>
-        </div>
+        </router-link>
       </template>
     </m-list-card>
     <!-- end of newsList -->
     <m-list-card title="英雄列表" icon="hero" :categories="heroCategories">
       <template #items="{category}">
-        <div class="d-flex flex-wrap" style='margin: 0 -0.3rem'>
-          <div class="p-2 fs-sm text-center" style="width:25%" v-for="(hero, i) in category.heroList" :key="i">
-          <img :src="hero.avatar" class="w-100 bor-rad" alt="">
-          <div>{{hero.name}}</div>
-        </div>
+        <div class="d-flex flex-wrap" style="margin: 0 -0.3rem">
+          <div
+            class="p-2 fs-sm text-center"
+            style="width:25%"
+            v-for="(hero, i) in category.heroList"
+            :key="i"
+          >
+            <img :src="hero.avatar" class="w-100 bor-rad" alt />
+            <div>{{hero.name}}</div>
+          </div>
         </div>
       </template>
     </m-list-card>
-    
   </div>
 </template>
 
 <script>
 import ListCard from "../components/ListCard";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 export default {
   name: "home",
 
-  filters:{
-    date(val){
-      return dayjs(val).format('MM/DD');
+  filters: {
+    date(val) {
+      return dayjs(val).format("MM/DD");
     }
   },
 
@@ -81,18 +91,18 @@ export default {
 
       newsCategories: [],
 
-      heroCategories: [],
+      heroCategories: []
     };
   },
   methods: {
-    async fecthNewsList(){
-      const res = await this.$http.get('news/list');
+    async fecthNewsList() {
+      const res = await this.$http.get("news/list");
       this.newsCategories = res.data;
     },
 
-    async fecthHeroList(){
-      const res = await this.$http.get('heroes/list');
-      this.heroCategories =  res.data;
+    async fecthHeroList() {
+      const res = await this.$http.get("heroes/list");
+      this.heroCategories = res.data;
     }
   },
   created() {
@@ -103,8 +113,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/iconfont/iconfont.css";
-
+@import url('//at.alicdn.com/t/font_1434562_7360rhuzczr.css');
 .swiper-pagination-bullets {
   .swiper-pagination-bullet {
     background: white;
