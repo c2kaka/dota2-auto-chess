@@ -13,12 +13,26 @@
               :action="uploadUrl"
               :headers="getAuthorization()"
               :show-file-list="false"
-              :on-success="afterUpload"
+              :on-success="res => $set(model, 'avatar', res.url)"
             >
               <img v-if="model.avatar" :src="model.avatar" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
+
+           <el-form-item label="海报">
+            <el-upload
+              class="avatar-uploader"
+              :action="uploadUrl"
+              :headers="getAuthorization()"
+              :show-file-list="false"
+              :on-success="res => $set(model, 'banner', res.url)"
+            >
+              <img v-if="model.banner" :src="model.banner" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+
           <el-form-item label="英雄别名">
             <el-input v-model="model.title" placeholder="英雄别名"></el-input>
           </el-form-item>
@@ -45,6 +59,7 @@
             <el-rate class="score-rate" show-score v-model="model.scores.survive"></el-rate>
           </el-form-item>
         </el-tab-pane>
+        
         <el-tab-pane label="技能" name="skills">
           <el-button type="primary" @click="model.skills.push({})">
             <i class="el-icon-plus">添加技能</i>
@@ -57,7 +72,8 @@
               <el-form-item label="技能图标">
                 <el-upload
                   class="avatar-uploader"
-                  :action="$http.defaults.baseURL+'/upload'"
+                  :action="uploadUrl"
+                  :headers="getAuthorization()"
                   :show-file-list="false"
                   :on-success="res => $set(item, 'icon', res.url)"
                 >
@@ -80,6 +96,38 @@
             </el-col>
           </el-row>
         </el-tab-pane>
+        
+        <el-tab-pane label="基础数据" name="stats">
+          <el-button type="primary" @click="model.stats.push({})">
+            <i class="el-icon-plus">添加基础数据</i>
+          </el-button>
+          <el-row type="flex" style="flex-wrap:wrap;margin-top:1rem">
+            <el-col style='margin-left:1rem' :md="11" v-for="(item,i) in model.stats" :key="i">
+              <el-form-item label="等级">
+                <el-input-number :min='0' :max="3"  v-model="item.level" ></el-input-number>
+              </el-form-item>
+              <el-form-item label="生命值">
+                <el-input-number :min='0' :max="5000" :step="10" v-model="item.HP" placeholder="生命值"></el-input-number>
+              </el-form-item>
+              <el-form-item label="攻击力">
+                <el-input-number :min='0'  v-model="item.damage" ></el-input-number>
+              </el-form-item>
+              <el-form-item label="护甲">
+                <el-input-number :min='0' v-model="item.armor" ></el-input-number>
+              </el-form-item>
+              <el-form-item label="攻击速度">
+                <el-input-number :min='0' :precision="2" :step="0.1" :max="10" v-model="item.attackSpeed" ></el-input-number>
+              </el-form-item>
+              <el-form-item label="攻击范围">
+                <el-input-number :min='0' :max='8' v-model="item.attackRange" ></el-input-number>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="danger" size="small" @click="model.skills.splice(i,1)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
+
         <el-tab-pane label="英雄攻略">
           <el-form-item label="推荐装备">
             <el-select style="width: 100%" v-model="model.items" multiple placeholder="请选择">
@@ -88,6 +136,7 @@
           </el-form-item>
         </el-tab-pane>
       </el-tabs>
+     
       <el-form-item style="margin-top:1rem;text-align:center">
         <el-button type="primary" native-type="submit">提交</el-button>
         <el-button type="primary" @click="$router.push('/heroes/list')">返回</el-button>
@@ -115,10 +164,6 @@ export default {
     };
   },
   methods: {
-    afterUpload(res) {
-      this.model.avatar = res.url;
-    },
-
     async save() {
       if (this.id) {
         await this.$http.put(`rest/heroes/${this.id}`, this.model);
@@ -145,7 +190,7 @@ export default {
     },
 
     routerPush() {
-      this.$router.push("/heroes/list");
+      //this.$router.push("/heroes/list");
       this.$message({
         type: "success",
         message: "保存成功"

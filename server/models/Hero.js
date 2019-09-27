@@ -24,9 +24,10 @@ const schema = mongoose.Schema({
     level: {type: Number}
   }]    ,
   stats: [{
-    Damage: { type: Number },
+    damage: { type: Number },
     armor: { type: Number },
     probability: { type: Number },
+    attackSpeed: { type: Number },
     level: { type: Number },
     HP: { type: Number },
     attackRange: {type: Number},

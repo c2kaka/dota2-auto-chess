@@ -115,7 +115,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('//at.alicdn.com/t/font_1434562_7360rhuzczr.css');
+@import url('//at.alicdn.com/t/font_1434562_42xb8emaxje.css');
 .swiper-pagination-bullets {
   .swiper-pagination-bullet {
     background: white;
