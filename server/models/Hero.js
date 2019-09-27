@@ -6,6 +6,8 @@ const schema = mongoose.Schema({
   banner: { type: String },
   title: { type: String },
   categories: [{ type: mongoose.SchemaTypes.ObjectId, ref: "Category" }],
+  race: {type: String},
+  profession: {type: String},
   scores: {
     cost: { type: Number },
     skills: { type: Number },

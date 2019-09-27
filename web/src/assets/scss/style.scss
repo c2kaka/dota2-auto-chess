@@ -25,6 +25,11 @@ p{
   line-height: 1.5em;
 }
 
+h2 {
+  padding: 0;
+  margin: 0;
+}
+
 //text-colors
 @each $colorKey, $color in $colors {
   .text-#{$colorKey} {
